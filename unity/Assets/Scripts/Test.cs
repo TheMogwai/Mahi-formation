@@ -22,5 +22,6 @@ public class Test : MonoBehaviour
     private void OnMouseDown()
     {
         vd.clip = newvd;
+        Debug.Log("click");
     }
 }
