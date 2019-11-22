@@ -37,7 +37,11 @@ public class TimeLineManager : MonoBehaviour
         if (DecisionBeginTransform.localPosition.x <= CurrentTimeTransform.localPosition.x && DecisionEndTransform.localPosition.x >= CurrentTimeTransform.localPosition.x)
             Array.ForEach(GameObject.FindObjectsOfType<CursorMesh>(), x => x.GetComponent<MeshRenderer>().enabled = true);
 
-        int timeLeft = (int)(DecisionEndTransform.localPosition.x - VideoPlayerRef.clockTime);
+        
+
+        int timeLeft = (int)((((RectTransform)DecisionEndTransform).anchorMin.x - _timelineSlider.value)* VideoPlayerRef.length);
+
+        Debug.Log(timeLeft+" " + VideoPlayerRef.time);
 
         if (timeLeft <= 10 && timeLeft >= 0)
         {
@@ -53,7 +57,7 @@ public class TimeLineManager : MonoBehaviour
             _timelineAudioSource.Stop();
             Timer.enabled = false;
         }
-        Timer.text = (int)(DecisionEndTransform.localPosition.x - VideoPlayerRef.clockTime) + "";
+        Timer.text = timeLeft + "";
     }
 
 
