@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+#if UNITY_EDITOR
     public float mouseSensitivity = 100.0f;
     public float clampAngle = 80.0f;
 
@@ -31,4 +32,5 @@ public class CameraController : MonoBehaviour
         Quaternion localRotation = Quaternion.Euler(rotX, rotY, 0.0f);
         transform.rotation = localRotation;
     }
+#endif
 }

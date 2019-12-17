@@ -11,17 +11,15 @@ public class TimeLineManager : MonoBehaviour
 {
     public VideoPlayer VideoPlayerRef;
     public Transform DecisionTransform, DecisionBeginTransform, DecisionEndTransform, CurrentTimeTransform;
-    public Text Timer;
-    public AudioClip TimerClip; 
+    public StopWatchController StopWatch;
+    public AudioClip TimerClip;
+    public Slider TimelineSlider;
+    public AudioSource TimelineAudioSource;
+    public int CriticalTime = 10;
 
-
-    private Slider _timelineSlider;
-    private AudioSource _timelineAudioSource;
     private void Awake()
     {
-        _timelineSlider = GetComponent<Slider>();
-        _timelineAudioSource = GetComponent<AudioSource>();
-        _timelineAudioSource.clip = TimerClip;
+        TimelineAudioSource.clip = TimerClip;
     }
     // Start is called before the first frame update
     void Start()
@@ -33,31 +31,32 @@ public class TimeLineManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _timelineSlider.value = (float)(VideoPlayerRef.time / VideoPlayerRef.length);
+        TimelineSlider.value = (float)(VideoPlayerRef.time / VideoPlayerRef.length);
         if (DecisionBeginTransform.localPosition.x <= CurrentTimeTransform.localPosition.x && DecisionEndTransform.localPosition.x >= CurrentTimeTransform.localPosition.x)
             Array.ForEach(GameObject.FindObjectsOfType<CursorMesh>(), x => x.GetComponent<MeshRenderer>().enabled = true);
 
         
 
-        int timeLeft = (int)((((RectTransform)DecisionEndTransform).anchorMin.x - _timelineSlider.value)* VideoPlayerRef.length);
+        float timeLeft = (float)((((RectTransform)DecisionEndTransform).anchorMin.x - TimelineSlider.value)* VideoPlayerRef.length);
 
-        Debug.Log(timeLeft+" " + VideoPlayerRef.time);
-
-        if (timeLeft <= 10 && timeLeft >= 0)
+        //Debug.Log(timeLeft+" " + VideoPlayerRef.time);
+        if (timeLeft <= CriticalTime && timeLeft > 0)
         {
-            _timelineAudioSource.pitch = 1f;
-            if (!_timelineAudioSource.isPlaying)
-            _timelineAudioSource.Play();
+            TimelineAudioSource.pitch = 1f;
+            if (!TimelineAudioSource.isPlaying)
+                TimelineAudioSource.Play();
             if (timeLeft <= 5)
-                _timelineAudioSource.pitch = 2f;
-            Timer.enabled = true;
+                TimelineAudioSource.pitch = 2f;
+            StopWatch.gameObject.SetActive(true);
+            StopWatch.TimeText.text = (int)timeLeft + "";
+            StopWatch.FillerCircle.fillAmount = (CriticalTime-timeLeft) / (float)CriticalTime;
         }
         else
         {
-            _timelineAudioSource.Stop();
-            Timer.enabled = false;
+            TimelineAudioSource.Stop();
+            StopWatch.gameObject.SetActive(false);
         }
-        Timer.text = timeLeft + "";
+        
     }
 
 

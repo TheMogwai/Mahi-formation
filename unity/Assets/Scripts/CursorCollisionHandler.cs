@@ -34,7 +34,9 @@ public class CursorCollisionHandler : MonoBehaviour
         cursorMesh.SetColor(CursorMesh.meshColor.green);
         videoPlayer.clip = targetClip;
         Array.ForEach(GameObject.FindObjectsOfType<CursorMesh>(), x => x.GetComponent<MeshRenderer>().enabled = false);
-        GameObject.FindGameObjectWithTag("TimeLine").SetActive(false);
+        GameObject tl = GameObject.FindGameObjectWithTag("TimeLine");
+        if (tl != null)
+                tl.SetActive(false);
         TextFadeIn textFadeIn = GameObject.FindObjectOfType<TextFadeIn>();
         if(targetClip.name == "fail")
         {
