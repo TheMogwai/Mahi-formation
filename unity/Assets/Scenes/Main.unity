@@ -571,9 +571,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 204c437703d88c949a63dc2db8041d98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentState: 0
-  currentMode: 0
-  SituationList: []
+  CurrentState: 0
+  CurrentMode: 0
+  CurrentPhase: 0
+  SituationList:
+  - {fileID: 11400000, guid: dfc27dc749e980f4ba9dac7f644116b5, type: 2}
+  TimeLine: {fileID: 1890459206}
 --- !u!4 &655418556
 Transform:
   m_ObjectHideFlags: 0

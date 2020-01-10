@@ -37,6 +37,11 @@ public class GameManager : MonoBehaviour
         SetState(0);
 
     }
+    private void SetPlay()
+    {
+        SetState(1);
+
+    }
 
     private void SetState(int State)
     {
