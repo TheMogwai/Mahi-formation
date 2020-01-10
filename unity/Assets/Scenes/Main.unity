@@ -571,6 +571,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 204c437703d88c949a63dc2db8041d98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentState: 0
+  currentMode: 0
+  SituationList: []
 --- !u!4 &655418556
 Transform:
   m_ObjectHideFlags: 0
