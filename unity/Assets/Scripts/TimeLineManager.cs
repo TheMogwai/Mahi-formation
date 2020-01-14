@@ -6,7 +6,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
 
-[RequireComponent(typeof(Slider))]
 public class TimeLineManager : MonoBehaviour
 {
     public VideoPlayer VideoPlayerRef;
@@ -39,7 +38,7 @@ public class TimeLineManager : MonoBehaviour
 
         float timeLeft = (float)((((RectTransform)DecisionEndTransform).anchorMin.x - TimelineSlider.value)* VideoPlayerRef.length);
 
-        //Debug.Log(timeLeft+" " + VideoPlayerRef.time);
+        Debug.Log(timeLeft+" " + VideoPlayerRef.time);
         if (timeLeft <= CriticalTime && timeLeft > 0)
         {
             TimelineAudioSource.pitch = 1f;

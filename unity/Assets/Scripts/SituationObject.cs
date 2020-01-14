@@ -8,6 +8,7 @@ using UnityEngine.Video;
 public class SituationObject : ScriptableObject
 {
     public string Name;
+    public Vector3 InitRot;
     public VideoClip clip;
     [Header("Phase 1")]
     public Phase Phase1;
@@ -24,6 +25,8 @@ public class SituationObject : ScriptableObject
 public struct Phase
 {
     [Range(0, 1)]
-    public float speedPhase1;
-    public float playTimePhase1;
+    public float HardModeSpeed;
+    [Range(0, 1)]
+    public float EasyModeSpeed;
+    public float playTime;
 }
