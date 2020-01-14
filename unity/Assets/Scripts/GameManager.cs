@@ -3,14 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 public enum GameState  {MainMenu = 0,Playing = 1, Pause = 2}
-public enum GameMode  {Easy = 0,Hard = 1}
+public enum GameDifficulty  {Easy = 0,Hard = 1}
 public enum GamePhase  {Phase_1 = 0, Phase_2 = 1, Phase_3 = 2 }
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public GameState CurrentState;
-    public GameMode CurrentMode;
-    public GamePhase CurrentPhase;
+    public GameDifficulty CurrentDifficulty;
+    //public GamePhase CurrentPhase;
     public List<SituationObject> SituationList;
     public TimeLineManager TimeLine;
 
@@ -22,7 +22,12 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SetMainMenu();
+        BeginPlay(0, 0);
+    }
+
+    public void BeginPlay(int difficulty, int situation)
+    {
+        
     }
 
     // Update is called once per frame
