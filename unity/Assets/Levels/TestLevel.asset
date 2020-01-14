@@ -13,13 +13,22 @@ MonoBehaviour:
   m_Name: TestLevel
   m_EditorClassIdentifier: 
   Name: Test
-  clip: {fileID: 32900000, guid: bfa0a9d4662ae594386eea3b4d59c1b8, type: 3}
+  InitRot: {x: 0, y: 0, z: 0}
+  clip: {fileID: 32900000, guid: 6ea17b38ab66d4547bc4997a08d0e4de, type: 3}
   Phase1:
-    speedPhase1: 0.6
-    playTimePhase1: 0
+    HardModeSpeed: 1
+    EasyModeSpeed: 0.6
+    playTime: 3
+  playersPosition:
+  - {fileID: 6968032923991769193, guid: 4ee62bf3df27b204d9240a3566fad2aa, type: 3}
+  - {fileID: 1913637967539111412, guid: b4757820a3d7b904eb75bed31ee85258, type: 3}
+  - {fileID: 4064741880020718783, guid: 443dabac0e7e65848bdcf4d3201d7cff, type: 3}
   Phase2:
-    speedPhase1: 0
-    playTimePhase1: 0
+    HardModeSpeed: 1
+    EasyModeSpeed: 0.6
+    playTime: 8
+  Jauge: {fileID: 0}
   Phase3:
-    speedPhase1: 0
-    playTimePhase1: 0
+    HardModeSpeed: 1
+    EasyModeSpeed: 1
+    playTime: 10
