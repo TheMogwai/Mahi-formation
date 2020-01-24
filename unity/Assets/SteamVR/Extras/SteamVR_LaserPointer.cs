@@ -29,6 +29,7 @@ namespace Valve.VR.Extras
 
         private void Start()
         {
+
             if (pose == null)
                 pose = this.GetComponent<SteamVR_Behaviour_Pose>();
             if (pose == null)
@@ -98,7 +99,6 @@ namespace Valve.VR.Extras
             }
 
             float dist = 100f;
-
             Ray raycast = new Ray(transform.position, transform.forward);
             RaycastHit hit;
             bool bHit = Physics.Raycast(raycast, out hit);
@@ -110,16 +110,19 @@ namespace Valve.VR.Extras
                 args.distance = 0f;
                 args.flags = 0;
                 args.target = previousContact;
+                args.position = hit.point;
                 OnPointerOut(args);
                 previousContact = null;
             }
-            if (bHit && previousContact != hit.transform)
+            if (bHit && (previousContact != hit.transform || hit.transform.CompareTag("Jauge")))
             {
                 PointerEventArgs argsIn = new PointerEventArgs();
                 argsIn.fromInputSource = pose.inputSource;
                 argsIn.distance = hit.distance;
                 argsIn.flags = 0;
-                argsIn.target = hit.transform;
+                argsIn.target = hit.transform; 
+                argsIn.position = hit.point;
+
                 OnPointerIn(argsIn);
                 previousContact = hit.transform;
             }
@@ -139,6 +142,7 @@ namespace Valve.VR.Extras
                 argsClick.distance = hit.distance;
                 argsClick.flags = 0;
                 argsClick.target = hit.transform;
+                argsClick.position = hit.point;
                 OnPointerClick(argsClick);
             }
 
@@ -161,6 +165,7 @@ namespace Valve.VR.Extras
         public SteamVR_Input_Sources fromInputSource;
         public uint flags;
         public float distance;
+        public Vector3 position;
         public Transform target;
     }
 

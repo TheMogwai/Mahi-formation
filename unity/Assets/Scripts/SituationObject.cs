@@ -13,6 +13,7 @@ public class SituationObject : ScriptableObject
     [Header("Phase 1")]
     public Phase Phase1;
     public List<GameObject> playersPosition;
+    public float waitTime = 10;
     [Header("Phase 2")]
     public Phase Phase2;
     public GameObject Jauge;
@@ -28,5 +29,5 @@ public struct Phase
     public float HardModeSpeed;
     [Range(0, 1)]
     public float EasyModeSpeed;
-    public float playTime;
+    public double playTime;
 }

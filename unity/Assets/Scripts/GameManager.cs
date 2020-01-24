@@ -10,8 +10,9 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public GameState CurrentState;
     public GameDifficulty CurrentDifficulty;
-    //public GamePhase CurrentPhase;
+    //
     public List<SituationObject> SituationList;
+    public SituationObject CurrentSituation;
     public TimeLineManager TimeLine;
 
     void Awake()
@@ -27,7 +28,10 @@ public class GameManager : MonoBehaviour
 
     public void BeginPlay(int difficulty, int situation)
     {
-        
+        CurrentDifficulty = (GameDifficulty) difficulty;
+        CurrentSituation = SituationList[situation];
+        TimeLine.InitSituation(CurrentSituation);
+        SetPlay();
     }
 
     // Update is called once per frame
@@ -45,7 +49,7 @@ public class GameManager : MonoBehaviour
     private void SetPlay()
     {
         SetState(1);
-
+        TimeLine.VideoPlayerRef.Play();
     }
 
     private void SetState(int State)

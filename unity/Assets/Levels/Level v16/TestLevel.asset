@@ -14,20 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Test
   InitRot: {x: 0, y: 0, z: 0}
-  clip: {fileID: 32900000, guid: 6ea17b38ab66d4547bc4997a08d0e4de, type: 3}
+  clip: {fileID: 32900000, guid: 9ce8c8ff50e47754db9845d5873e7c80, type: 3}
   Phase1:
     HardModeSpeed: 1
     EasyModeSpeed: 0.6
-    playTime: 3
+    playTime: 4.6
   playersPosition:
-  - {fileID: 6968032923991769193, guid: 4ee62bf3df27b204d9240a3566fad2aa, type: 3}
-  - {fileID: 1913637967539111412, guid: b4757820a3d7b904eb75bed31ee85258, type: 3}
-  - {fileID: 4064741880020718783, guid: 443dabac0e7e65848bdcf4d3201d7cff, type: 3}
+  - {fileID: 6534464424595733159, guid: 29370f5978e21f045be7c1c688cb3170, type: 3}
+  - {fileID: 1658853221594070292, guid: d159710514152d447b24c685aa3326ca, type: 3}
+  - {fileID: 2623843183391083690, guid: 3e7eb9e0c65d677489c2a4661f4823ca, type: 3}
+  waitTime: 10
   Phase2:
     HardModeSpeed: 1
-    EasyModeSpeed: 0.6
-    playTime: 8
-  Jauge: {fileID: 0}
+    EasyModeSpeed: 0.3
+    playTime: 6.7
+  Jauge: {fileID: 2247033648119606371, guid: 32847c0f043d10c429b1d0133730a620, type: 3}
   Phase3:
     HardModeSpeed: 1
     EasyModeSpeed: 1
