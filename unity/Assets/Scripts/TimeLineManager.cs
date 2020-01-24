@@ -37,7 +37,7 @@ public class TimeLineManager : MonoBehaviour
         if (GameManager.Instance.CurrentState == GameState.Playing)
         {
             TimelineSlider.value = (float)(VideoPlayerRef.time / VideoPlayerRef.length);
-           Debug.Log(VideoPlayerRef.time);
+          // Debug.Log(VideoPlayerRef.time);
             switch (CurrentPhase)
             {
                 case GamePhase.Phase_1:

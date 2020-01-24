@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        BeginPlay(0, 0);
+        BeginPlay(0, 1);
     }
 
     public void BeginPlay(int difficulty, int situation)
