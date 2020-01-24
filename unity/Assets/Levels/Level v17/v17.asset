@@ -14,19 +14,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: 
   InitRot: {x: 0, y: 0, z: 0}
-  clip: {fileID: 0}
+  clip: {fileID: 32900000, guid: 9ce8c8ff50e47754db9845d5873e7c80, type: 3}
   Phase1:
-    HardModeSpeed: 0
-    EasyModeSpeed: 0
-    playTime: 0
-  playersPosition: []
+    HardModeSpeed: 1
+    EasyModeSpeed: 0.678
+    playTime: 4.6
+  playersPosition:
+  - {fileID: 695821636660013997, guid: bba28f26b0ef2c74689ca3fcf7313187, type: 3}
+  - {fileID: 845943325268489173, guid: 87cfd62c7d8953d47bde974b56b60d9d, type: 3}
+  - {fileID: 6377919272117730287, guid: 82f5237127b488a4285ae41c09b604cc, type: 3}
   waitTime: 10
   Phase2:
-    HardModeSpeed: 0
-    EasyModeSpeed: 0
-    playTime: 0
-  Jauge: {fileID: 0}
+    HardModeSpeed: 1
+    EasyModeSpeed: 0.468
+    playTime: 6.7
+  Jauge: {fileID: 490798353118174272, guid: 9d9f806ada1013c499c1e1b898004d27, type: 3}
   Phase3:
-    HardModeSpeed: 0
-    EasyModeSpeed: 0
-    playTime: 0
+    HardModeSpeed: 1
+    EasyModeSpeed: 1
+    playTime: 10
