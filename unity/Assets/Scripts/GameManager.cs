@@ -14,7 +14,8 @@ public class GameManager : MonoBehaviour
     public List<SituationObject> SituationList;
     public SituationObject CurrentSituation;
     public TimeLineManager TimeLine;
-
+    [SerializeField]
+    private int difficulty = 0,sIndex = 0;
     void Awake()
     { 
         Instance = this;
@@ -23,13 +24,13 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        BeginPlay(0, 1);
+        SetMainMenu();
     }
 
-    public void BeginPlay(int difficulty, int situation)
+    public void BeginPlay()
     {
         CurrentDifficulty = (GameDifficulty) difficulty;
-        CurrentSituation = SituationList[situation];
+        CurrentSituation = SituationList[sIndex];
         TimeLine.InitSituation(CurrentSituation);
         SetPlay();
     }
@@ -44,7 +45,7 @@ public class GameManager : MonoBehaviour
     private void SetMainMenu()
     {
         SetState(0);
-
+        TimeLine.SetMainMenu();
     }
     private void SetPlay()
     {

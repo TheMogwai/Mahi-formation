@@ -92,6 +92,8 @@ public class TimeLineManager : MonoBehaviour
 
     }
 
+
+
     public void SetPhase2()
     {
         TimelineAudioSource.Stop();
@@ -131,23 +133,39 @@ public class TimeLineManager : MonoBehaviour
 
     public void InitSituation(SituationObject currentSituation)
     {
+        Init();
         VideoPlayerRef.clip = currentSituation.clip;
         CurrentPhase = 0;
         foreach (var ppos in currentSituation.playersPosition)
         {
             Instantiate(ppos,Cursors);
         }
-
         Instantiate(currentSituation.Jauge,Jauge);
         CriticalTime = GameManager.Instance.CurrentSituation.waitTime;
+        if (GameManager.Instance.CurrentDifficulty == GameDifficulty.Easy)
+            VideoPlayerRef.playbackSpeed = GameManager.Instance.CurrentSituation.Phase1.EasyModeSpeed;
+        else
+            VideoPlayerRef.playbackSpeed = GameManager.Instance.CurrentSituation.Phase1.HardModeSpeed;   
+    }
+
+    public void SetMainMenu()
+    {
+        Init();
+    }
+
+    private void Init()
+    {
+        for (int i = 0; i < Cursors.childCount; i++)
+        {
+            Destroy(Cursors.GetChild(i).gameObject);
+        }
+        for (int i = 0; i < Jauge.childCount; i++)
+        {
+            Destroy(Jauge.GetChild(i).gameObject);
+        }
         TimelineAudioSource.Stop();
         StopWatch.gameObject.SetActive(false);
         Cursors.gameObject.SetActive(false);
         Jauge.gameObject.SetActive(false);
-        if (GameManager.Instance.CurrentDifficulty == GameDifficulty.Easy)
-        VideoPlayerRef.playbackSpeed = GameManager.Instance.CurrentSituation.Phase1.EasyModeSpeed;
-        else
-            VideoPlayerRef.playbackSpeed = GameManager.Instance.CurrentSituation.Phase1.HardModeSpeed;
-        
     }
 }

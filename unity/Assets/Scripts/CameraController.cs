@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR;
 
 public class CameraController : MonoBehaviour
 {
@@ -13,6 +14,13 @@ public class CameraController : MonoBehaviour
 
     void Start()
     {
+        if (XRDevice.userPresence == UserPresenceState.Present)
+        {
+            GetComponent<Camera>().stereoTargetEye = StereoTargetEyeMask.Both;
+            enabled = false;
+            return;
+        }
+        GetComponent<Camera>().stereoTargetEye = StereoTargetEyeMask.None;
         Vector3 rot = transform.localRotation.eulerAngles;
         rotY = rot.y;
         rotX = rot.x;
