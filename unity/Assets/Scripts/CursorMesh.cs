@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 [ExecuteInEditMode]
@@ -59,6 +60,7 @@ public class CursorMesh : MonoBehaviour
         mesh.RecalculateBounds();
         mesh.Optimize();
         SetColor(_meshColor);
+
     }
 
     // Update is called once per frame

@@ -14,11 +14,10 @@ public class CameraController : MonoBehaviour
 
     void Start()
     {
-        if (XRDevice.userPresence == UserPresenceState.Present)
+        if (!MouseControlled)
         {
             GetComponent<Camera>().stereoTargetEye = StereoTargetEyeMask.Both;
-            enabled = false;
-            return;
+           return;
         }
         GetComponent<Camera>().stereoTargetEye = StereoTargetEyeMask.None;
         Vector3 rot = transform.localRotation.eulerAngles;

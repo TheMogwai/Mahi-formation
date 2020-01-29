@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1913637967539111413}
   m_Layer: 0
-  m_Name: FailCursor2
+  m_Name: Cursor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 1913637968653934435}
   - component: {fileID: 1913637968653934438}
   - component: {fileID: 1913637968653934437}
-  - component: {fileID: 1913637968653934436}
+  - component: {fileID: 346010799415499069}
   m_Layer: 0
   m_Name: Mesh
   m_TagString: Untagged
@@ -80,7 +80,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1913637968653934434}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -111,7 +111,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &1913637968653934436
+--- !u!114 &346010799415499069
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -124,10 +124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _meshColor: 0
-  materials:
-  - {fileID: 2100000, guid: 139659b035f4c5d44ac2fb888bc7c787, type: 2}
-  - {fileID: 2100000, guid: aa58fa144c481ad4eac80454135e1622, type: 2}
-  - {fileID: 2100000, guid: 8a4581b1c8f493c41b1200619dd29229, type: 2}
+  materials: []
 --- !u!1 &1913637968721782490
 GameObject:
   m_ObjectHideFlags: 0
@@ -185,4 +182,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd506c4faa566484ab057aabeb99cb32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetClip: {fileID: 32900000, guid: 4aacc401b3bb3924aae24276412719ce, type: 3}
+  playerRight: 0

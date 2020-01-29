@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6534464423595972553}
   - component: {fileID: 6534464423595972558}
   - component: {fileID: 6534464423595972559}
-  - component: {fileID: 6534464423595972552}
+  - component: {fileID: 775205982711750150}
   m_Layer: 0
   m_Name: Mesh
   m_TagString: Untagged
@@ -79,7 +79,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &6534464423595972552
+--- !u!114 &775205982711750150
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,8 +94,8 @@ MonoBehaviour:
   _meshColor: 0
   materials:
   - {fileID: 2100000, guid: 139659b035f4c5d44ac2fb888bc7c787, type: 2}
-  - {fileID: 2100000, guid: aa58fa144c481ad4eac80454135e1622, type: 2}
   - {fileID: 2100000, guid: 8a4581b1c8f493c41b1200619dd29229, type: 2}
+  - {fileID: 2100000, guid: aa58fa144c481ad4eac80454135e1622, type: 2}
 --- !u!1 &6534464424231022518
 GameObject:
   m_ObjectHideFlags: 0

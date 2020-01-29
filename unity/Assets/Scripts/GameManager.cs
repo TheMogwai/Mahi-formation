@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public List<SituationObject> SituationList;
     public SituationObject CurrentSituation;
     public TimeLineManager TimeLine;
+
     [SerializeField]
     private int difficulty = 0,sIndex = 0;
     void Awake()
@@ -46,11 +47,13 @@ public class GameManager : MonoBehaviour
     {
         SetState(0);
         TimeLine.SetMainMenu();
+        UIManager.Instance.SetMainMenu();
     }
     private void SetPlay()
     {
         SetState(1);
         TimeLine.VideoPlayerRef.Play();
+        UIManager.Instance.SetPlay();
     }
 
     private void SetState(int State)
