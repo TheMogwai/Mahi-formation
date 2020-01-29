@@ -1,11 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
-    public GameObject MainMenu;
+
+    [Header("Main Menu")] public GameObject MainMenu;
+    public Dropdown levels;
+
+    [Header("Recap Panel")]
     public GameObject RecapMenu;
 
     void Awake()
