@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     public TimeLineManager TimeLine;
 
     [SerializeField]
-    private int difficulty = 0,sIndex = 0;
+    private int sIndex = 0;
     void Awake()
     { 
         Instance = this;
@@ -28,20 +28,30 @@ public class GameManager : MonoBehaviour
         SetMainMenu();
     }
 
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
+
     public void BeginPlay()
     {
-        CurrentDifficulty = (GameDifficulty) difficulty;
         CurrentSituation = SituationList[sIndex];
         TimeLine.InitSituation(CurrentSituation);
         SetPlay();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetSituation()
     {
-        
+        sIndex = UIManager.Instance.levels.value;
     }
 
+    public void SetDifficulty(int Diff)
+    {
+        CurrentDifficulty = (GameDifficulty)Diff;
+        UIManager.Instance.SetDifficultyUI();
+    }
 
     private void SetMainMenu()
     {
