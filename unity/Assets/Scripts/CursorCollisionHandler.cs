@@ -39,7 +39,7 @@ public class CursorCollisionHandler : MonoBehaviour,IPointerClickHandler,IPointe
         } 
         else
         {
-
+            GameManager.Instance.AddPlayerScore(500);
         }
         GameManager.Instance.TimeLine.SetPhase2();
 

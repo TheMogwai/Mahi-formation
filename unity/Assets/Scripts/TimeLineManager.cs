@@ -85,9 +85,6 @@ public class TimeLineManager : MonoBehaviour
                     Jauge.gameObject.SetActive(false);
                     break;
             }
-
-
-
         }
 
     }
@@ -107,18 +104,29 @@ public class TimeLineManager : MonoBehaviour
         else
             VideoPlayerRef.playbackSpeed = GameManager.Instance.CurrentSituation.Phase2.HardModeSpeed;
     }
+
     public void SetPhase3()
     {
         TimelineAudioSource.Stop();
         StopWatch.gameObject.SetActive(false);
         Cursors.gameObject.SetActive(false);
         Jauge.gameObject.SetActive(false);
-        CurrentPhase = (GamePhase) 2;
+        CurrentPhase = (GamePhase)2;
         VideoPlayerRef.Play();
         if (GameManager.Instance.CurrentDifficulty == GameDifficulty.Easy)
             VideoPlayerRef.playbackSpeed = GameManager.Instance.CurrentSituation.Phase3.EasyModeSpeed;
         else
             VideoPlayerRef.playbackSpeed = GameManager.Instance.CurrentSituation.Phase3.HardModeSpeed;
+    }
+    public void SetPhase3(Vector3 worldPosition)
+    {
+        
+        double TimeReward = 500 * (VideoPlayerRef.time / GameManager.Instance.CurrentSituation.Phase3.playTime);
+        double PositionReward = 500 * (1 - ((2 * worldPosition.magnitude) / Jauge.GetChild(0).transform.localScale.z));
+
+        GameManager.Instance.AddPlayerScore(TimeReward+PositionReward);
+        Debug.Log(worldPosition.magnitude + " " + PositionReward + " "+ (VideoPlayerRef.time / GameManager.Instance.CurrentSituation.Phase3.playTime)+" "+TimeReward);
+        SetPhase3();
     }
 
 
@@ -148,12 +156,7 @@ public class TimeLineManager : MonoBehaviour
             VideoPlayerRef.playbackSpeed = GameManager.Instance.CurrentSituation.Phase1.HardModeSpeed;   
     }
 
-    public void SetMainMenu()
-    {
-        Init();
-    }
-
-    private void Init()
+    public void Init()
     {
         for (int i = 0; i < Cursors.childCount; i++)
         {

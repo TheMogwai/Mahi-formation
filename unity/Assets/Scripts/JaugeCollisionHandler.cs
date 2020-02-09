@@ -53,7 +53,9 @@ public class JaugeCollisionHandler : MonoBehaviour, IPointerClickHandler, IPoint
     public void OnPointerClick(PointerEventData eventData)
     {
         cursor.gameObject.SetActive(false);
-        GameManager.Instance.TimeLine.SetPhase3();
+        Vector3 localpos = transform.InverseTransformPoint(eventData.worldPosition);
+        cursor.transform.localPosition = new Vector3(0, 0, localpos.z);
+        GameManager.Instance.TimeLine.SetPhase3(cursor.parent.GetChild(0).localPosition- cursor.transform.localPosition);
     }
 
     public void OnPointerEnter(PointerEventData eventData)

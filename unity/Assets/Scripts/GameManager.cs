@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private int sIndex = 0;
+    [SerializeField]
+    private double playerScore = 0;
     void Awake()
     { 
         Instance = this;
@@ -52,16 +54,26 @@ public class GameManager : MonoBehaviour
         CurrentDifficulty = (GameDifficulty)Diff;
         UIManager.Instance.SetDifficultyUI();
     }
+    public void SetPlayerScore(double score)
+    {
+        playerScore = score;
+    }
+
+    public void AddPlayerScore(double score)
+    {
+        playerScore += score;
+    }
 
     private void SetMainMenu()
     {
         SetState(0);
-        TimeLine.SetMainMenu();
+        TimeLine.Init();
         UIManager.Instance.SetMainMenu();
     }
     private void SetPlay()
     {
         SetState(1);
+        SetPlayerScore(0);
         TimeLine.VideoPlayerRef.Play();
         UIManager.Instance.SetPlay();
     }
