@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,12 +11,12 @@ public class UIManager : MonoBehaviour
     [Header("Main Menu")] 
     public GameObject MainMenu;
     public Dropdown levels;
-    public Button facile,Difficile;
+    public Button EasyButton,HardButton;
 
 
     [Header("Recap Panel")]
     public GameObject RecapMenu;
-
+    public Text Score, PlayerGuessed, AccuracyText, ReactionTimeText;
     void Awake()
     {
         Instance = this;
@@ -33,8 +34,20 @@ public class UIManager : MonoBehaviour
 
     public void SetDifficultyUI()
     {
-        facile.interactable = (GameManager.Instance.CurrentDifficulty == GameDifficulty.Hard);
-        Difficile.interactable = (GameManager.Instance.CurrentDifficulty == GameDifficulty.Easy);
+        EasyButton.interactable = (GameManager.Instance.CurrentDifficulty == GameDifficulty.Hard);
+        HardButton.interactable = (GameManager.Instance.CurrentDifficulty == GameDifficulty.Easy);
+    }
+
+    internal void WrongGuess()
+    {
+        Debug.Log("WrongGuess");
+        PlayerGuessed.text = "Non";
+    }
+
+    internal void RightGuess()
+    {
+        Debug.Log("RightGuess");
+        PlayerGuessed.text = "Oui";
     }
 
     private void SetDropDown()
@@ -59,4 +72,10 @@ public class UIManager : MonoBehaviour
         MainMenu.SetActive(false);
     }
 
+    internal void SetRecapInfo(double rt, float acc)
+    {
+        Score.text = ((int)GameManager.Instance.PlayerScore).ToString();
+        AccuracyText.text = ((int)acc) + "%";
+        ReactionTimeText.text = rt.ToString("F2") + "s";
+    }
 }

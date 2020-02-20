@@ -27,8 +27,11 @@ namespace Mahi
             }
 
 
-            PointerEventData myData = new PointerEventData(EventSystem.current);
-            myData.worldPosition = e.position;
+            PointerEventData myData = new PointerEventData(EventSystem.current)
+            {
+                worldPosition = e.position,
+                
+            };
             clickHandler.OnPointerClick(myData);
         }
 
@@ -40,8 +43,10 @@ namespace Mahi
                 return;
             }
 
-            PointerEventData myData = new PointerEventData(EventSystem.current);
-            myData.worldPosition = e.position;
+            PointerEventData myData = new PointerEventData(EventSystem.current)
+            {
+                worldPosition = e.position
+            };
             pointerExitHandler.OnPointerExit(myData);
         }
 
@@ -52,8 +57,10 @@ namespace Mahi
             {
                 return;
             }
-            PointerEventData myData = new PointerEventData(EventSystem.current);
-            myData.worldPosition = e.position;
+            PointerEventData myData = new PointerEventData(EventSystem.current)
+            {
+                worldPosition = e.position,
+            };
             pointerEnterHandler.OnPointerEnter(myData);
         }
     }

@@ -24,20 +24,14 @@ public class TimeLineManager : MonoBehaviour
     {
         TimelineAudioSource.clip = TimerClip;
     }
-    // Start is called before the first frame update
-    void Start()
-    {
 
-
-    }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (GameManager.Instance.CurrentState == GameState.Playing)
         {
             TimelineSlider.value = (float)(VideoPlayerRef.time / VideoPlayerRef.length);
-          // Debug.Log(VideoPlayerRef.time);
             switch (CurrentPhase)
             {
                 case GamePhase.Phase_1:
@@ -71,11 +65,16 @@ public class TimeLineManager : MonoBehaviour
                 case GamePhase.Phase_2:
                     if (VideoPlayerRef.time > GameManager.Instance.CurrentSituation.Phase2.playTime)
                     {
+                        UIManager.Instance.SetRecapInfo(0,0);
                         SetPhase3();
                     }
 
                     break;
                 case GamePhase.Phase_3:
+                    if (VideoPlayerRef.time >= GameManager.Instance.CurrentSituation.Phase3.playTime)
+                    {
+                        UIManager.Instance.SetRecapMenu();
+                    }
 
                     break;
                 default:
@@ -113,28 +112,15 @@ public class TimeLineManager : MonoBehaviour
         Jauge.gameObject.SetActive(false);
         CurrentPhase = (GamePhase)2;
         VideoPlayerRef.Play();
-        if (GameManager.Instance.CurrentDifficulty == GameDifficulty.Easy)
-            VideoPlayerRef.playbackSpeed = GameManager.Instance.CurrentSituation.Phase3.EasyModeSpeed;
-        else
-            VideoPlayerRef.playbackSpeed = GameManager.Instance.CurrentSituation.Phase3.HardModeSpeed;
-    }
-    public void SetPhase3(Vector3 worldPosition)
-    {
+        VideoPlayerRef.playbackSpeed = (GameManager.Instance.CurrentDifficulty == GameDifficulty.Easy)?GameManager.Instance.CurrentSituation.Phase3.EasyModeSpeed
+                                                                                                      :GameManager.Instance.CurrentSituation.Phase3.HardModeSpeed;
         
-        double TimeReward = 500 * (VideoPlayerRef.time / GameManager.Instance.CurrentSituation.Phase3.playTime);
-        double PositionReward = 500 * (1 - ((2 * worldPosition.magnitude) / Jauge.GetChild(0).transform.localScale.z));
-
-        GameManager.Instance.AddPlayerScore(TimeReward+PositionReward);
-        Debug.Log(worldPosition.magnitude + " " + PositionReward + " "+ (VideoPlayerRef.time / GameManager.Instance.CurrentSituation.Phase3.playTime)+" "+TimeReward);
-        SetPhase3();
     }
-
 
 
     public void UpdateVideoTime(string time)
     {
-        float t;
-        float.TryParse(time, out t);
+        float.TryParse(time, out var t);
         VideoPlayerRef.time = VideoPlayerRef.length * t;
     }
 
@@ -142,6 +128,8 @@ public class TimeLineManager : MonoBehaviour
     public void InitSituation(SituationObject currentSituation)
     {
         Init();
+        VideoPlayerRef.Stop();
+        VideoPlayerRef.time = 0;
         VideoPlayerRef.clip = currentSituation.clip;
         CurrentPhase = 0;
         foreach (var ppos in currentSituation.playersPosition)
@@ -150,14 +138,13 @@ public class TimeLineManager : MonoBehaviour
         }
         Instantiate(currentSituation.Jauge,Jauge);
         CriticalTime = GameManager.Instance.CurrentSituation.waitTime;
-        if (GameManager.Instance.CurrentDifficulty == GameDifficulty.Easy)
-            VideoPlayerRef.playbackSpeed = GameManager.Instance.CurrentSituation.Phase1.EasyModeSpeed;
-        else
-            VideoPlayerRef.playbackSpeed = GameManager.Instance.CurrentSituation.Phase1.HardModeSpeed;   
+        VideoPlayerRef.playbackSpeed = (GameManager.Instance.CurrentDifficulty == GameDifficulty.Easy)?GameManager.Instance.CurrentSituation.Phase1.EasyModeSpeed: GameManager.Instance.CurrentSituation.Phase1.HardModeSpeed;
+
     }
 
     public void Init()
     {
+
         for (int i = 0; i < Cursors.childCount; i++)
         {
             Destroy(Cursors.GetChild(i).gameObject);

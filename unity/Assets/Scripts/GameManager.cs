@@ -17,8 +17,13 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private int sIndex = 0;
-    [SerializeField]
-    private double playerScore = 0;
+
+    [field: SerializeField] public double PlayerScore { get; private set; } = 0;
+
+
+    public int BestPossibleScore = 500;
+    public int RightPlayerGuess = 500;
+
     void Awake()
     { 
         Instance = this;
@@ -30,18 +35,27 @@ public class GameManager : MonoBehaviour
         SetMainMenu();
     }
 
-    // Update is called once per frame
-    void Update()
+
+    public void SetMainMenu()
     {
-
+        SetState(0);
+        TimeLine.Init();
+        UIManager.Instance.SetMainMenu();
     }
-
 
     public void BeginPlay()
     {
         CurrentSituation = SituationList[sIndex];
         TimeLine.InitSituation(CurrentSituation);
         SetPlay();
+    }
+
+    private void SetPlay()
+    {
+        SetPlayerScore(0);
+        TimeLine.VideoPlayerRef.Play();
+        UIManager.Instance.SetPlay();
+        SetState(1);
     }
 
     public void SetSituation()
@@ -54,34 +68,41 @@ public class GameManager : MonoBehaviour
         CurrentDifficulty = (GameDifficulty)Diff;
         UIManager.Instance.SetDifficultyUI();
     }
-    public void SetPlayerScore(double score)
-    {
-        playerScore = score;
-    }
-
-    public void AddPlayerScore(double score)
-    {
-        playerScore += score;
-    }
-
-    private void SetMainMenu()
-    {
-        SetState(0);
-        TimeLine.Init();
-        UIManager.Instance.SetMainMenu();
-    }
-    private void SetPlay()
-    {
-        SetState(1);
-        SetPlayerScore(0);
-        TimeLine.VideoPlayerRef.Play();
-        UIManager.Instance.SetPlay();
-    }
 
     private void SetState(int State)
     {
         CurrentState = (GameState)State;
     }
 
+    public void CalculateScore(Vector3 worldPosition)
+    {
+        var e = (worldPosition.magnitude / TimeLine.Jauge.GetChild(0).transform.localScale.z)*2;
+        var positionReward = BestPossibleScore * (1 - e);
+        var t = (CurrentSituation.Phase2.playTime - CurrentSituation.Phase1.playTime);
+        var rt = TimeLine.VideoPlayerRef.time - CurrentSituation.Phase1.playTime;
+        var ct = rt / t;
+        var pt = 1 - ct;
+        var timeReward = positionReward * pt;
+        AddPlayerScore(timeReward);
+        UIManager.Instance.SetRecapInfo(rt, (1 - e) * 100);
+        TimeLine.SetPhase3();
+
+    }
+
+
+    public void SetPlayerScore(double score)
+    {
+        PlayerScore = score;
+    }
+
+    public void AddPlayerScore(double score)
+    {
+        PlayerScore += score;
+    }
+
+    public void GuessedRightPlayer()
+    {
+        AddPlayerScore(RightPlayerGuess);
+    }
 }
 

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb57b13a88056ed4889331a86aae85cd, type: 3}
   m_Name: v17
   m_EditorClassIdentifier: 
-  Name: test 2
+  Name: test2
   InitRot: {x: 0, y: 0, z: 0}
   clip: {fileID: 32900000, guid: 9ce8c8ff50e47754db9845d5873e7c80, type: 3}
   Phase1:

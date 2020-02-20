@@ -8,28 +8,17 @@ public class JaugeCollisionHandler : MonoBehaviour, IPointerClickHandler, IPoint
 
     public Transform exactJumpPostion;
     public Transform cursor;
-    // Start is called before the first frame update
-    void Start()
-    {
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     void OnMouseOver()
     {
-        RaycastHit hit;
+        Debug.Log("OnMouseOver");
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(ray, out var hit))
         {
-            Debug.Log("smth");
+
             if (hit.transform.gameObject.CompareTag("Jauge"))
             {
-                Debug.Log("Jauge");
                 cursor.gameObject.SetActive(true);
                 Vector3 localpos = transform.InverseTransformPoint(hit.point);
                 cursor.transform.localPosition = new Vector3(0, 0, localpos.z);
@@ -39,28 +28,31 @@ public class JaugeCollisionHandler : MonoBehaviour, IPointerClickHandler, IPoint
 
     public void OnMouseExit()
     {
+        Debug.Log("OnMouseExit");
         cursor.gameObject.SetActive(false);
     }
 
     public void OnMouseDown()
     {
+        Debug.Log("OnMouseDown");
         cursor.gameObject.SetActive(false);
-        GameManager.Instance.TimeLine.SetPhase3();
-
+        GameManager.Instance.CalculateScore(cursor.parent.GetChild(0).localPosition - cursor.transform.localPosition);
     }
+
 
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        Debug.Log("OnPointerClick");
         cursor.gameObject.SetActive(false);
         Vector3 localpos = transform.InverseTransformPoint(eventData.worldPosition);
         cursor.transform.localPosition = new Vector3(0, 0, localpos.z);
-        GameManager.Instance.TimeLine.SetPhase3(cursor.parent.GetChild(0).localPosition- cursor.transform.localPosition);
+        GameManager.Instance.CalculateScore(cursor.parent.GetChild(0).localPosition - cursor.transform.localPosition);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Debug.Log("hello");
+        Debug.Log("OnPointerEnter");
         cursor.gameObject.SetActive(true);
         Vector3 localpos = transform.InverseTransformPoint(eventData.worldPosition);
         cursor.transform.localPosition = new Vector3(0, 0, localpos.z);
@@ -68,6 +60,7 @@ public class JaugeCollisionHandler : MonoBehaviour, IPointerClickHandler, IPoint
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        Debug.Log("OnPointerExit");
         cursor.gameObject.SetActive(false);
 
     }

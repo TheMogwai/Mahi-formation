@@ -73,20 +73,17 @@ namespace Valve.VR.Extras
 
         public virtual void OnPointerIn(PointerEventArgs e)
         {
-            if (PointerIn != null)
-                PointerIn(this, e);
+            PointerIn?.Invoke(this, e);
         }
 
         public virtual void OnPointerClick(PointerEventArgs e)
         {
-            if (PointerClick != null)
-                PointerClick(this, e);
+            PointerClick?.Invoke(this, e);
         }
 
         public virtual void OnPointerOut(PointerEventArgs e)
         {
-            if (PointerOut != null)
-                PointerOut(this, e);
+            PointerOut?.Invoke(this, e);
         }
 
 
@@ -100,28 +97,31 @@ namespace Valve.VR.Extras
 
             float dist = 100f;
             Ray raycast = new Ray(transform.position, transform.forward);
-            RaycastHit hit;
-            bool bHit = Physics.Raycast(raycast, out hit);
+            bool bHit = Physics.Raycast(raycast, out var hit);
 
             if (previousContact && previousContact != hit.transform)
             {
-                PointerEventArgs args = new PointerEventArgs();
-                args.fromInputSource = pose.inputSource;
-                args.distance = 0f;
-                args.flags = 0;
-                args.target = previousContact;
-                args.position = hit.point;
+                PointerEventArgs args = new PointerEventArgs
+                {
+                    fromInputSource = pose.inputSource,
+                    distance = 0f,
+                    flags = 0,
+                    target = previousContact,
+                    position = hit.point
+                };
                 OnPointerOut(args);
                 previousContact = null;
             }
             if (bHit && (previousContact != hit.transform || hit.transform.CompareTag("Jauge")))
             {
-                PointerEventArgs argsIn = new PointerEventArgs();
-                argsIn.fromInputSource = pose.inputSource;
-                argsIn.distance = hit.distance;
-                argsIn.flags = 0;
-                argsIn.target = hit.transform; 
-                argsIn.position = hit.point;
+                PointerEventArgs argsIn = new PointerEventArgs
+                {
+                    fromInputSource = pose.inputSource,
+                    distance = hit.distance,
+                    flags = 0,
+                    target = hit.transform,
+                    position = hit.point
+                };
 
                 OnPointerIn(argsIn);
                 previousContact = hit.transform;
@@ -137,12 +137,14 @@ namespace Valve.VR.Extras
 
             if (bHit && interactWithUI.GetStateUp(pose.inputSource))
             {
-                PointerEventArgs argsClick = new PointerEventArgs();
-                argsClick.fromInputSource = pose.inputSource;
-                argsClick.distance = hit.distance;
-                argsClick.flags = 0;
-                argsClick.target = hit.transform;
-                argsClick.position = hit.point;
+                PointerEventArgs argsClick = new PointerEventArgs
+                {
+                    fromInputSource = pose.inputSource,
+                    distance = hit.distance,
+                    flags = 0,
+                    target = hit.transform,
+                    position = hit.point
+                };
                 OnPointerClick(argsClick);
             }
 

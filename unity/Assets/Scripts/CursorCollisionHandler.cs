@@ -35,11 +35,12 @@ public class CursorCollisionHandler : MonoBehaviour,IPointerClickHandler,IPointe
         
         if(!playerRight)
         {
-
+            UIManager.Instance.WrongGuess();
         } 
         else
         {
-            GameManager.Instance.AddPlayerScore(500);
+            UIManager.Instance.RightGuess();
+            GameManager.Instance.GuessedRightPlayer();
         }
         GameManager.Instance.TimeLine.SetPhase2();
 
