@@ -21,10 +21,20 @@ namespace Valve.VR.InteractionSystem
 		private Vector3 startMousePosition;
 		private float realTime;
 
+        public void Awake()
+        {
+            if (Valve.VR.SteamVR.active)
+                Camera.main.stereoTargetEye = StereoTargetEyeMask.Both;
+            else
+            {
+                Camera.main.stereoTargetEye = StereoTargetEyeMask.None;
+            }
+        }
 		//-------------------------------------------------
 		void OnEnable()
 		{
 			realTime = Time.realtimeSinceStartup;
+            Debug.Log(Valve.VR.SteamVR.active);
 		}
 
 

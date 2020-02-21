@@ -12,6 +12,8 @@ namespace Mahi
 
         private void Awake()
         {
+                gameObject.SetActive(Valve.VR.SteamVR.active);
+
             steamVrLaserPointer = gameObject.GetComponent<SteamVR_LaserPointer>();
             steamVrLaserPointer.PointerIn += OnPointerIn;
             steamVrLaserPointer.PointerOut += OnPointerOut;

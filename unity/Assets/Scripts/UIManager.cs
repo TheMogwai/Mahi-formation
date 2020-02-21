@@ -55,7 +55,7 @@ public class UIManager : MonoBehaviour
         levels.ClearOptions();
         foreach (var situation in GameManager.Instance.SituationList)
         {
-            levels.options.Add(new Dropdown.OptionData(situation.name));
+            levels.options.Add(new Dropdown.OptionData(situation.Name));
         }
 
         levels.RefreshShownValue();
